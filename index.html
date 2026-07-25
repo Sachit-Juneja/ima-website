@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMA | Less is More.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: #e5e5e5; }
+        .fade-in-up { animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col selection:bg-white selection:text-black">
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-xl font-bold tracking-widest uppercase text-white">IMA.</a>
+            <div class="space-x-8 text-sm font-medium tracking-wide">
+                <a href="about.html" class="hover:text-white transition-colors duration-300">The Science</a>
+                <a href="join.html" class="hover:text-white transition-colors duration-300">Join the Elite</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="flex-grow flex flex-col justify-center items-center text-center px-6 pt-32 pb-20">
+        <h1 class="text-7xl md:text-9xl font-extrabold tracking-tighter text-white mb-6 fade-in-up">
+            Less is More.
+        </h1>
+        <p class="text-lg md:text-2xl font-light text-gray-400 max-w-2xl mx-auto mb-12 fade-in-up delay-100 tracking-wide">
+            Welcome to the International Micropenis Association.<br>Precision. Efficiency. Elegance.
+        </p>
+        <div class="fade-in-up delay-200">
+            <a href="join.html" class="inline-block bg-white text-black px-10 py-4 text-sm font-bold tracking-widest uppercase hover:bg-gray-200 transition-colors duration-300">
+                Join the Elite
+            </a>
+        </div>
+    </main>
+
+    <!-- Mission Statement -->
+    <section class="py-32 bg-black border-t border-white/10">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-xs font-bold tracking-[0.3em] uppercase text-gray-500 mb-8">Our Mission</h2>
+            <p class="text-3xl md:text-5xl font-light leading-tight tracking-tight">
+                Society has long misunderstood the compact gentleman. We exist to celebrate <span class="text-white font-semibold">aerodynamic efficiency</span> and streamlined living.
+            </p>
+            <p class="mt-8 text-gray-400 font-light text-lg">Excess is a flaw. Optimization is a feature.</p>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-32 bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-xs font-bold tracking-[0.3em] uppercase text-gray-500 mb-16 text-center">Verified Members</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="border border-white/10 p-10 hover:border-white/30 transition-colors duration-500">
+                    <p class="text-xl font-light italic mb-8">"Since joining the IMA, I've realized my physical optimization is a feature, not a bug. The mental clarity is unparalleled."</p>
+                    <div class="text-sm font-bold tracking-wide uppercase text-white">— Arthur P.</div>
+                    <div class="text-xs text-gray-500 mt-1">Chief of Streamlining</div>
+                </div>
+                <div class="border border-white/10 p-10 hover:border-white/30 transition-colors duration-500">
+                    <p class="text-xl font-light italic mb-8">"I used to feel burdened. Now I realize I'm simply a marvel of modern micro-engineering. Precision at its finest."</p>
+                    <div class="text-sm font-bold tracking-wide uppercase text-white">— William T.</div>
+                    <div class="text-xs text-gray-500 mt-1">Director of Precision</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 border-t border-white/10 text-center text-xs text-gray-600 uppercase tracking-widest">
+        &copy; 2026 International Micropenis Association. Strictly Confidential.
+    </footer>
+</body>
+</html>
