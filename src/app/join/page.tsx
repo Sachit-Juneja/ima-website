@@ -82,9 +82,10 @@ export default function Join() {
             </p>
             <select
               required
+              defaultValue=""
               className="w-full px-4 py-3 text-sm rounded-none focus:ring-0 appearance-none bg-transparent border border-white/20 text-white transition-colors duration-300 focus:border-white focus:outline-none [&>option]:bg-[#0a0a0a]"
             >
-              <option value="" disabled selected>
+              <option value="" disabled>
                 Select your engineering tolerance...
               </option>
               <option value="sub-10">Sub-10mm (Grand Master Class)</option>
