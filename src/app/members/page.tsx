@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef, useCallback } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight } from "lucide-react";
 
 // ── Deterministic pseudo-random (mulberry32) ──────────────────────────
 function mulberry32(seed: number) {
@@ -106,7 +106,6 @@ interface Member {
   quote: string;
   joined: string;
   avatar: string;
-  isAneesh?: boolean;
 }
 
 function generateMembers(): Member[] {
@@ -116,6 +115,20 @@ function generateMembers(): Member[] {
 
   for (let i = 0; i < TOTAL; i++) {
     const memberNumber = i + 1; // 1-indexed
+
+    if (memberNumber === 845) {
+      // Hari Chandrasekhar is member #845
+      members.push({
+        id: 845,
+        name: "Hari Chandrasekhar",
+        title: "World Record Contender & Aerodynamic Specialist",
+        quote:
+          "Nobody knows this but I think I'm the world record holder for the smallest penis",
+        joined: "2024",
+        avatar: "/assets/Hari.jpg",
+      });
+      continue;
+    }
 
     if (memberNumber === 893) {
       // Aneesh is member #893
@@ -127,7 +140,6 @@ function generateMembers(): Member[] {
           "Before discovering the IMA, I didn't realize how much the standard societal expectations were weighing me down. My compact design is actually an evolutionary leap in aerodynamic supremacy.",
         joined: "2024",
         avatar: "/assets/6E84D118-76DC-4645-BD09-68BFD7933FCA.jpg",
-        isAneesh: true,
       });
       continue;
     }
@@ -161,8 +173,6 @@ export default function Members() {
   const [allMembers] = useState<Member[]>(() => generateMembers());
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const [highlightAneesh, setHighlightAneesh] = useState(false);
-  const aneeshRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
   const filtered = useMemo(() => {
@@ -186,19 +196,6 @@ export default function Members() {
   useEffect(() => {
     setPage(1);
   }, [search]);
-
-  // Find Aneesh button handler
-  const goToAneesh = useCallback(() => {
-    setSearch("");
-    // Aneesh is member 893, so he's at index 892 in the unfiltered list
-    const aneeshPage = Math.ceil(893 / MEMBERS_PER_PAGE);
-    setPage(aneeshPage);
-    setHighlightAneesh(true);
-    setTimeout(() => {
-      aneeshRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 300);
-    setTimeout(() => setHighlightAneesh(false), 3000);
-  }, []);
 
   // Scroll to top of grid on page change
   useEffect(() => {
@@ -258,13 +255,6 @@ export default function Members() {
             {allMembers.length.toLocaleString()} verified members worldwide.
             Each one a testament to aerodynamic excellence and cognitive supremacy.
           </p>
-          <button
-            onClick={goToAneesh}
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-white border border-white/10 hover:border-white/30 px-4 py-2 transition-all duration-300 mt-4 group"
-          >
-            <Star className="w-3 h-3 group-hover:text-amber-400 transition-colors" />
-            <span>Find Member #893</span>
-          </button>
         </motion.div>
 
         {/* Search */}
@@ -304,42 +294,21 @@ export default function Members() {
             {paginated.map((member) => (
               <motion.div
                 key={member.id}
-                ref={member.isAneesh ? aneeshRef : undefined}
                 variants={itemVariants}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className={`
-                  border p-3 bg-[#0a0a0a] group relative overflow-hidden
-                  transition-all duration-500 cursor-default
-                  ${
-                    member.isAneesh && highlightAneesh
-                      ? "border-amber-400/60 shadow-[0_0_30px_rgba(251,191,36,0.15)]"
-                      : member.isAneesh
-                      ? "border-white/20 hover:border-amber-400/40"
-                      : "border-white/10 hover:border-white/30"
-                  }
-                `}
+                className="border border-white/10 hover:border-white/30 p-3 bg-[#0a0a0a] group relative overflow-hidden transition-all duration-500 cursor-default"
               >
                 {/* Member number badge */}
                 <div className="absolute top-2 right-2 text-[10px] font-bold text-gray-700 tracking-wider z-10">
                   #{member.id}
                 </div>
 
-                {/* Aneesh badge */}
-                {member.isAneesh && (
-                  <div className="absolute top-2 left-2 z-10">
-                    <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-                  </div>
-                )}
-
                 {/* Avatar */}
                 <div className="aspect-square mb-3 overflow-hidden bg-[#111]">
                   <img
                     src={member.avatar}
                     alt={member.name}
-                    className={`
-                      w-full h-full object-cover transition-all duration-700
-                      ${member.isAneesh ? "grayscale-0" : "grayscale group-hover:grayscale-0"}
-                    `}
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                     loading="lazy"
                   />
                 </div>
