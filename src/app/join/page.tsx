@@ -1,9 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
+import { Loader2, CreditCard, Lock } from "lucide-react";
 
 export default function Join() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [measurement, setMeasurement] = useState("");
+  const [advantage, setAdvantage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -23,9 +31,39 @@ export default function Join() {
     },
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    alert("Transmission secure. The board will evaluate your micro-credentials.");
+    setLoading(true);
+    setErrorMsg(null);
+
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          measurement,
+          advantage,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to initialize verification checkout.");
+      }
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error("No Stripe checkout URL received.");
+      }
+    } catch (err: unknown) {
+      console.error(err);
+      setErrorMsg(err instanceof Error ? err.message : "An unexpected error occurred.");
+      setLoading(false);
+    }
   };
 
   return (
@@ -44,10 +82,20 @@ export default function Join() {
         </motion.h1>
         <motion.p
           variants={itemVariants}
-          className="text-gray-400 font-light text-center mb-12"
+          className="text-gray-400 font-light text-center mb-8"
         >
           Submit your credentials. Only the truly optimized will be accepted.
         </motion.p>
+
+        {errorMsg && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8 p-4 border border-rose-500/30 bg-rose-950/20 text-rose-300 text-xs font-mono rounded"
+          >
+            {errorMsg}
+          </motion.div>
+        )}
 
         <motion.form variants={itemVariants} className="space-y-8" onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-6">
@@ -58,6 +106,8 @@ export default function Join() {
               <input
                 type="text"
                 required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="w-full px-4 py-3 text-sm rounded-none focus:ring-0 bg-transparent border border-white/20 text-white transition-colors duration-300 focus:border-white focus:outline-none"
               />
             </div>
@@ -68,6 +118,8 @@ export default function Join() {
               <input
                 type="email"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 text-sm rounded-none focus:ring-0 bg-transparent border border-white/20 text-white transition-colors duration-300 focus:border-white focus:outline-none"
               />
             </div>
@@ -82,17 +134,18 @@ export default function Join() {
             </p>
             <select
               required
-              defaultValue=""
+              value={measurement}
+              onChange={(e) => setMeasurement(e.target.value)}
               className="w-full px-4 py-3 text-sm rounded-none focus:ring-0 appearance-none bg-transparent border border-white/20 text-white transition-colors duration-300 focus:border-white focus:outline-none [&>option]:bg-[#0a0a0a]"
             >
               <option value="" disabled>
                 Select your engineering tolerance...
               </option>
-              <option value="sub-10">Sub-10mm (Grand Master Class)</option>
-              <option value="10-25">10mm - 25mm (Elite)</option>
-              <option value="25-50">25mm - 50mm (Distinguished)</option>
-              <option value="50-88">50mm - 88.9mm (Standard IMA Tolerance)</option>
-              <option value="reject">89mm+ (Ineligible - Too much drag)</option>
+              <option value="Sub-10mm (Grand Master Class)">Sub-10mm (Grand Master Class)</option>
+              <option value="10mm - 25mm (Elite)">10mm - 25mm (Elite)</option>
+              <option value="25mm - 50mm (Distinguished)">25mm - 50mm (Distinguished)</option>
+              <option value="50mm - 88.9mm (Standard IMA Tolerance)">50mm - 88.9mm (Standard IMA Tolerance)</option>
+              <option value="89mm+ (Ineligible)">89mm+ (Ineligible - Too much drag)</option>
             </select>
           </div>
 
@@ -103,6 +156,8 @@ export default function Join() {
             <textarea
               required
               rows={4}
+              value={advantage}
+              onChange={(e) => setAdvantage(e.target.value)}
               placeholder="Describe a time your streamlined anatomy provided a definitive tactical advantage in a professional or athletic setting..."
               className="w-full px-4 py-3 text-sm rounded-none focus:ring-0 resize-none bg-transparent border border-white/20 text-white transition-colors duration-300 focus:border-white focus:outline-none"
             ></textarea>
@@ -124,14 +179,35 @@ export default function Join() {
             </label>
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            type="submit"
-            className="w-full bg-white text-black py-4 text-sm font-bold tracking-widest uppercase hover:bg-gray-200 transition-colors duration-300"
-          >
-            Submit for Verification
-          </motion.button>
+          <div className="pt-2 border-t border-white/10">
+            <div className="flex items-center justify-between text-xs text-gray-500 mb-4 font-mono">
+              <span className="flex items-center gap-1.5">
+                <Lock className="w-3 h-3 text-gray-400" />
+                VERIFICATION DUES:
+              </span>
+              <span className="text-white font-bold">$45 CAD (Lifetime)</span>
+            </div>
+
+            <motion.button
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              type="submit"
+              disabled={loading}
+              className="w-full bg-white text-black py-4 text-sm font-bold tracking-widest uppercase hover:bg-gray-200 transition-colors duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Connecting to Stripe...</span>
+                </>
+              ) : (
+                <>
+                  <CreditCard className="w-4 h-4" />
+                  <span>Pay $45 CAD & Submit for Verification</span>
+                </>
+              )}
+            </motion.button>
+          </div>
         </motion.form>
       </motion.div>
     </main>
