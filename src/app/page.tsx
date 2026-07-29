@@ -84,42 +84,54 @@ export default function Home() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-xs font-bold tracking-[0.3em] uppercase text-gray-500 mb-16 text-center"
+            className="text-xs font-bold tracking-[0.3em] uppercase text-gray-500 mb-4 text-center"
           >
             Verified Members
           </motion.h2>
-          <div className="grid md:grid-cols-2 gap-12">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-gray-600 text-sm text-center mb-16"
+          >
+            901 members and counting
+          </motion.p>
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mb-12">
             {[
-              {
-                quote:
-                  "Since joining the IMA, I've realized my physical optimization is a feature, not a bug. The mental clarity is unparalleled.",
-                name: "Arthur P.",
-                title: "Chief of Streamlining",
-              },
-              {
-                quote:
-                  "I used to feel burdened. Now I realize I'm simply a marvel of modern micro-engineering. Precision at its finest.",
-                name: "William T.",
-                title: "Director of Precision",
-              },
-            ].map((testimonial, i) => (
+              { name: "Arthur P.", title: "Chief of Streamlining", img: "https://randomuser.me/api/portraits/men/32.jpg" },
+              { name: "William T.", title: "Director of Precision", img: "https://randomuser.me/api/portraits/men/45.jpg" },
+              { name: "James K.", title: "Grand Optimiser", img: "https://randomuser.me/api/portraits/men/67.jpg" },
+              { name: "Robert M.", title: "Baron of Biomechanics", img: "https://randomuser.me/api/portraits/men/12.jpg" },
+              { name: "Aneesh", title: "Aerodynamic Pioneer", img: "/assets/6E84D118-76DC-4645-BD09-68BFD7933FCA.jpg" },
+              { name: "Daniel S.", title: "Sage of Streamlining", img: "https://randomuser.me/api/portraits/men/88.jpg" },
+            ].map((member, i) => (
               <motion.div
-                key={testimonial.name}
+                key={member.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: i * 0.2 }}
-                className="border border-white/10 p-10 hover:border-white/30 transition-colors duration-500 group"
+                transition={{ duration: 0.8, delay: i * 0.1 }}
+                className="border border-white/10 p-3 hover:border-white/30 transition-colors duration-500 group"
               >
-                <p className="text-xl font-light italic mb-8 text-gray-300 group-hover:text-white transition-colors duration-300">
-                  "{testimonial.quote}"
-                </p>
-                <div className="text-sm font-bold tracking-wide uppercase text-white">
-                  — {testimonial.name}
+                <div className="aspect-square mb-3 overflow-hidden bg-[#111]">
+                  <img
+                    src={member.img}
+                    alt={member.name}
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                  />
                 </div>
-                <div className="text-xs text-gray-500 mt-1">{testimonial.title}</div>
+                <h3 className="text-sm font-semibold text-white truncate">{member.name}</h3>
+                <p className="text-[10px] text-gray-500 uppercase tracking-wider truncate">{member.title}</p>
               </motion.div>
             ))}
+          </div>
+          <div className="text-center">
+            <Link
+              href="/members"
+              className="inline-block border border-white/10 text-gray-400 hover:text-white hover:border-white/30 px-8 py-3 text-sm tracking-widest uppercase transition-all duration-300"
+            >
+              View All 901 Members →
+            </Link>
           </div>
         </div>
       </section>

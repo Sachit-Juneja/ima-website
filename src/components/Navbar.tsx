@@ -9,7 +9,7 @@ export default function Navbar() {
 
   const links = [
     { name: "The Science", path: "/about" },
-    { name: "Testimonials", path: "/testimonials" },
+    { name: "Members", path: "/members" },
     { name: "Join the Elite", path: "/join" },
   ];
 
