@@ -76,13 +76,13 @@ export default function Join() {
       >
         <motion.h1
           variants={itemVariants}
-          className="text-4xl font-bold tracking-tighter text-white mb-4 text-center"
+          className="text-4xl font-bold tracking-tighter text-[var(--text-primary)] mb-4 text-center"
         >
           Verification Protocol
         </motion.h1>
         <motion.p
           variants={itemVariants}
-          className="text-gray-400 font-light text-center mb-8"
+          className="text-[var(--text-secondary)] font-light text-center mb-8"
         >
           Submit your credentials. Only the truly optimized will be accepted.
         </motion.p>
@@ -100,7 +100,7 @@ export default function Join() {
         <motion.form variants={itemVariants} className="space-y-8" onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">
+              <label className="block text-xs font-bold tracking-widest uppercase text-[var(--text-muted)] mb-2">
                 Legal Name
               </label>
               <input
@@ -108,11 +108,11 @@ export default function Join() {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 text-sm rounded-none focus:ring-0 bg-transparent border border-white/20 text-white transition-colors duration-300 focus:border-white focus:outline-none"
+                className="w-full px-4 py-3 text-sm rounded-none focus:ring-0 bg-[var(--input-bg)] border border-[var(--border-main)] text-[var(--text-primary)] transition-colors duration-300 focus:border-[var(--border-hover)] focus:outline-none"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">
+              <label className="block text-xs font-bold tracking-widest uppercase text-[var(--text-muted)] mb-2">
                 Secure Email
               </label>
               <input
@@ -120,23 +120,23 @@ export default function Join() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 text-sm rounded-none focus:ring-0 bg-transparent border border-white/20 text-white transition-colors duration-300 focus:border-white focus:outline-none"
+                className="w-full px-4 py-3 text-sm rounded-none focus:ring-0 bg-[var(--input-bg)] border border-[var(--border-main)] text-[var(--text-primary)] transition-colors duration-300 focus:border-[var(--border-hover)] focus:outline-none"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">
+            <label className="block text-xs font-bold tracking-widest uppercase text-[var(--text-muted)] mb-2">
               Current Measurement (MM)
             </label>
-            <p className="text-xs text-gray-600 mb-3 italic">
+            <p className="text-xs text-[var(--text-muted)] mb-3 italic">
               Precision matters. Please calibrate your calipers before answering.
             </p>
             <select
               required
               value={measurement}
               onChange={(e) => setMeasurement(e.target.value)}
-              className="w-full px-4 py-3 text-sm rounded-none focus:ring-0 appearance-none bg-transparent border border-white/20 text-white transition-colors duration-300 focus:border-white focus:outline-none [&>option]:bg-[#0a0a0a]"
+              className="w-full px-4 py-3 text-sm rounded-none focus:ring-0 appearance-none bg-[var(--input-bg)] border border-[var(--border-main)] text-[var(--text-primary)] transition-colors duration-300 focus:border-[var(--border-hover)] focus:outline-none [&>option]:bg-[var(--bg-card)] [&>option]:text-[var(--text-primary)]"
             >
               <option value="" disabled>
                 Select your engineering tolerance...
@@ -150,7 +150,7 @@ export default function Join() {
           </div>
 
           <div>
-            <label className="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">
+            <label className="block text-xs font-bold tracking-widest uppercase text-[var(--text-muted)] mb-2">
               Tactical Advantage
             </label>
             <textarea
@@ -159,7 +159,7 @@ export default function Join() {
               value={advantage}
               onChange={(e) => setAdvantage(e.target.value)}
               placeholder="Describe a time your streamlined anatomy provided a definitive tactical advantage in a professional or athletic setting..."
-              className="w-full px-4 py-3 text-sm rounded-none focus:ring-0 resize-none bg-transparent border border-white/20 text-white transition-colors duration-300 focus:border-white focus:outline-none"
+              className="w-full px-4 py-3 text-sm rounded-none focus:ring-0 resize-none bg-[var(--input-bg)] border border-[var(--border-main)] text-[var(--text-primary)] transition-colors duration-300 focus:border-[var(--border-hover)] focus:outline-none placeholder-[var(--text-muted)]"
             ></textarea>
           </div>
 
@@ -168,24 +168,24 @@ export default function Join() {
               type="checkbox"
               required
               id="confirm"
-              className="mt-1 accent-white bg-transparent border-gray-600 w-4 h-4 rounded-none cursor-pointer"
+              className="mt-1 accent-[var(--text-primary)] bg-[var(--input-bg)] border-[var(--border-main)] w-4 h-4 rounded-none cursor-pointer"
             />
             <label
               htmlFor="confirm"
-              className="text-sm text-gray-400 font-light cursor-pointer select-none"
+              className="text-sm text-[var(--text-secondary)] font-light cursor-pointer select-none"
             >
               I hereby swear under penalty of perjury that my equipment does not exceed the
-              legal IMA limit of 3.5 inches on a warm day.
+              legal IMA limit of 1.5 inches on a warm day.
             </label>
           </div>
 
-          <div className="pt-2 border-t border-white/10">
-            <div className="flex items-center justify-between text-xs text-gray-500 mb-4 font-mono">
+          <div className="pt-2 border-t border-[var(--border-main)]">
+            <div className="flex items-center justify-between text-xs text-[var(--text-muted)] mb-4 font-mono">
               <span className="flex items-center gap-1.5">
-                <Lock className="w-3 h-3 text-gray-400" />
+                <Lock className="w-3 h-3 text-[var(--text-muted)]" />
                 VERIFICATION DUES:
               </span>
-              <span className="text-white font-bold">$45 CAD (Lifetime)</span>
+              <span className="text-[var(--text-primary)] font-bold">$45 CAD (Lifetime)</span>
             </div>
 
             <motion.button
@@ -193,7 +193,7 @@ export default function Join() {
               whileTap={{ scale: 0.99 }}
               type="submit"
               disabled={loading}
-              className="w-full bg-white text-black py-4 text-sm font-bold tracking-widest uppercase hover:bg-gray-200 transition-colors duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-[var(--button-bg)] text-[var(--button-text)] py-4 text-sm font-bold tracking-widest uppercase hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <>

@@ -94,11 +94,6 @@ const QUOTES = [
   "Optimized vascular routing changed my life.",
 ];
 
-const YEARS = [
-  "2024","2023","2022","2021","2020","2019","2018","2017","2016","2015",
-  "2014","2013","2012","2011","2010","2009","2008","2007","2006","2005",
-];
-
 interface Member {
   id: number;
   name: string;
@@ -114,7 +109,7 @@ function getJoinedYear(memberNumber: number): string {
   }
   const startYear = 2005;
   const endYear = 2025;
-  const yearRange = endYear - startYear; // 20
+  const yearRange = endYear - startYear;
   const year = startYear + Math.floor(((memberNumber - 1) / 824) * (yearRange + 1));
   return Math.min(2025, year).toString();
 }
@@ -259,10 +254,10 @@ export default function Members() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-[var(--text-primary)] mb-6">
             Our Members.
           </h1>
-          <p className="text-xl text-gray-400 font-light leading-relaxed max-w-3xl mx-auto mb-4">
+          <p className="text-xl text-[var(--text-secondary)] font-light leading-relaxed max-w-3xl mx-auto mb-4">
             {allMembers.length.toLocaleString()} verified members worldwide.
             Each one a testament to aerodynamic excellence and cognitive supremacy.
           </p>
@@ -277,16 +272,16 @@ export default function Members() {
           ref={gridRef}
         >
           <div className="relative max-w-md mx-auto">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)]" />
             <input
               type="text"
               placeholder="Search by name, title, or member #..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-transparent border border-white/10 text-white placeholder-gray-600 pl-12 pr-4 py-3 text-sm tracking-wide focus:outline-none focus:border-white/30 transition-colors duration-300"
+              className="w-full bg-[var(--input-bg)] border border-[var(--border-main)] text-[var(--text-primary)] placeholder-[var(--text-muted)] pl-12 pr-4 py-3 text-sm tracking-wide focus:outline-none focus:border-[var(--border-hover)] transition-colors duration-300"
             />
           </div>
-          <div className="text-center mt-4 text-xs text-gray-600 tracking-wide">
+          <div className="text-center mt-4 text-xs text-[var(--text-muted)] tracking-wide">
             Showing {paginated.length} of {filtered.length.toLocaleString()} members
             {search && ` matching "${search}"`}
           </div>
@@ -307,15 +302,15 @@ export default function Members() {
                 key={member.id}
                 variants={itemVariants}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="border border-white/10 hover:border-white/30 p-3 bg-[#0a0a0a] group relative overflow-hidden transition-all duration-500 cursor-default"
+                className="border border-[var(--border-main)] hover:border-[var(--border-hover)] p-3 bg-[var(--bg-card)] group relative overflow-hidden transition-all duration-500 cursor-default"
               >
                 {/* Member number badge */}
-                <div className="absolute top-2 right-2 text-[10px] font-bold text-gray-700 tracking-wider z-10">
+                <div className="absolute top-2 right-2 text-[10px] font-bold text-[var(--badge-text)] tracking-wider z-10">
                   #{member.id}
                 </div>
 
                 {/* Avatar */}
-                <div className="aspect-square mb-3 overflow-hidden bg-[#111]">
+                <div className="aspect-square mb-3 overflow-hidden bg-[var(--bg-subtle)]">
                   <img
                     src={member.avatar}
                     alt={member.name}
@@ -326,20 +321,20 @@ export default function Members() {
 
                 {/* Info */}
                 <div className="space-y-1">
-                  <h3 className="text-sm font-semibold text-white truncate">
+                  <h3 className="text-sm font-semibold text-[var(--text-primary)] truncate">
                     {member.name}
                   </h3>
-                  <p className="text-[10px] text-gray-500 uppercase tracking-wider truncate">
+                  <p className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider truncate">
                     {member.title}
                   </p>
-                  <p className="text-[10px] text-gray-700 tracking-wide">
+                  <p className="text-[10px] text-[var(--text-secondary)] tracking-wide opacity-80">
                     Since {member.joined}
                   </p>
                 </div>
 
                 {/* Hover quote overlay */}
-                <div className="absolute inset-0 bg-black/90 flex items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                  <p className="text-[11px] text-gray-300 font-light italic text-center leading-relaxed">
+                <div className="absolute inset-0 bg-[var(--quote-bg)] flex items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <p className="text-[11px] text-[var(--text-primary)] font-light italic text-center leading-relaxed">
                     &ldquo;{member.quote}&rdquo;
                   </p>
                 </div>
@@ -359,14 +354,14 @@ export default function Members() {
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              className="p-2 border border-white/10 text-gray-400 hover:text-white hover:border-white/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300"
+              className="p-2 border border-[var(--border-main)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-hover)] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
 
             {getPageRange().map((p, i) =>
               p < 0 ? (
-                <span key={`ellipsis-${i}`} className="px-2 text-gray-600 text-sm">
+                <span key={`ellipsis-${i}`} className="px-2 text-[var(--text-muted)] text-sm">
                   …
                 </span>
               ) : (
@@ -377,8 +372,8 @@ export default function Members() {
                     min-w-[36px] h-9 text-sm font-medium border transition-all duration-300
                     ${
                       p === page
-                        ? "bg-white text-black border-white"
-                        : "border-white/10 text-gray-400 hover:text-white hover:border-white/30"
+                        ? "bg-[var(--button-bg)] text-[var(--button-text)] border-[var(--button-bg)]"
+                        : "border-[var(--border-main)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-hover)]"
                     }
                   `}
                 >
@@ -390,7 +385,7 @@ export default function Members() {
             <button
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
-              className="p-2 border border-white/10 text-gray-400 hover:text-white hover:border-white/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300"
+              className="p-2 border border-[var(--border-main)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-hover)] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300"
             >
               <ChevronRight className="w-4 h-4" />
             </button>

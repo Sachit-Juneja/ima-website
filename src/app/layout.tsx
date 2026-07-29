@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,10 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth antialiased h-full`}>
-      <body className="min-h-full flex flex-col bg-[#0a0a0a] text-[#e5e5e5] font-sans selection:bg-white selection:text-black">
-        <Navbar />
-        {children}
-        <Footer />
+      <body className="min-h-full flex flex-col font-sans selection:bg-white selection:text-black transition-colors duration-300">
+        <ThemeProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

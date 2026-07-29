@@ -4,9 +4,47 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
-body {
-  background-color: #0a0a0a;
-  color: #e5e5e5;
-  -webkit-font-smoothing: antialiased;
+:root {
+  --bg-main: #0a0a0a;
+  --bg-card: #0a0a0a;
+  --bg-card-alt: #111111;
+  --bg-subtle: #141414;
+  --text-primary: #ffffff;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --border-main: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.3);
+  --nav-bg: rgba(10, 10, 10, 0.85);
+  --quote-bg: rgba(0, 0, 0, 0.92);
+  --button-bg: #ffffff;
+  --button-text: #000000;
+  --button-hover: #e5e5e5;
+  --input-bg: transparent;
+  --badge-text: #616161;
 }
 
+html.light {
+  --bg-main: #f8f9fa;
+  --bg-card: #ffffff;
+  --bg-card-alt: #f1f5f9;
+  --bg-subtle: #e9ecef;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --border-main: rgba(0, 0, 0, 0.12);
+  --border-hover: rgba(0, 0, 0, 0.35);
+  --nav-bg: rgba(248, 249, 250, 0.85);
+  --quote-bg: rgba(255, 255, 255, 0.96);
+  --button-bg: #0f172a;
+  --button-text: #ffffff;
+  --button-hover: #1e293b;
+  --input-bg: #ffffff;
+  --badge-text: #94a3b8;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

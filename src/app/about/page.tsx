@@ -32,13 +32,13 @@ export default function About() {
       >
         <motion.h1
           variants={itemVariants}
-          className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-8"
+          className="text-5xl md:text-7xl font-bold tracking-tighter text-[var(--text-primary)] mb-8"
         >
           Superior by Design.
         </motion.h1>
         <motion.p
           variants={itemVariants}
-          className="text-xl text-gray-400 font-light leading-relaxed mb-20"
+          className="text-xl text-[var(--text-secondary)] font-light leading-relaxed mb-20"
         >
           The prevailing narrative equates mass with capability. At the IMA, our research
           indicates the exact opposite. We are the vanguard of human evolution, shedding
@@ -47,27 +47,27 @@ export default function About() {
 
         <motion.h2
           variants={itemVariants}
-          className="text-xs font-bold tracking-[0.3em] uppercase text-gray-500 mb-8 border-b border-white/10 pb-4"
+          className="text-xs font-bold tracking-[0.3em] uppercase text-[var(--text-muted)] mb-8 border-b border-[var(--border-main)] pb-4"
         >
           The Science of Streamlining
         </motion.h2>
 
         <div className="grid md:grid-cols-2 gap-12 mb-20">
           <motion.div variants={itemVariants}>
-            <h3 className="text-2xl font-semibold text-white mb-4">
+            <h3 className="text-2xl font-semibold text-[var(--text-primary)] mb-4">
               Optimized Vascular Routing
             </h3>
-            <p className="text-gray-400 font-light leading-relaxed">
+            <p className="text-[var(--text-secondary)] font-light leading-relaxed">
               By minimizing peripheral tissue, the cardiovascular system operates at peak
               efficiency. Less blood flow required below the equator results in a 42%
               increase in cerebral circulation. Our members literally think faster.
             </p>
           </motion.div>
           <motion.div variants={itemVariants}>
-            <h3 className="text-2xl font-semibold text-white mb-4">
+            <h3 className="text-2xl font-semibold text-[var(--text-primary)] mb-4">
               Aerodynamic Supremacy
             </h3>
-            <p className="text-gray-400 font-light leading-relaxed">
+            <p className="text-[var(--text-secondary)] font-light leading-relaxed">
               A reduced physical profile significantly lowers the drag coefficient during
               high-stakes athletic maneuvers. We are built for speed, agility, and
               uncompromising performance.
@@ -77,7 +77,7 @@ export default function About() {
 
         <motion.h2
           variants={itemVariants}
-          className="text-xs font-bold tracking-[0.3em] uppercase text-gray-500 mb-8 border-b border-white/10 pb-4"
+          className="text-xs font-bold tracking-[0.3em] uppercase text-[var(--text-muted)] mb-8 border-b border-[var(--border-main)] pb-4"
         >
           Our Legacy
         </motion.h2>
@@ -105,12 +105,12 @@ export default function About() {
               variants={itemVariants}
               className="flex flex-col md:flex-row gap-6"
             >
-              <div className="md:w-1/4 text-white font-bold tracking-widest">
+              <div className="md:w-1/4 text-[var(--text-primary)] font-bold tracking-widest">
                 {legacy.year}
               </div>
               <div className="md:w-3/4">
-                <h4 className="text-lg font-semibold text-white mb-2">{legacy.title}</h4>
-                <p className="text-gray-400 font-light">{legacy.desc}</p>
+                <h4 className="text-lg font-semibold text-[var(--text-primary)] mb-2">{legacy.title}</h4>
+                <p className="text-[var(--text-secondary)] font-light">{legacy.desc}</p>
               </div>
             </motion.div>
           ))}
