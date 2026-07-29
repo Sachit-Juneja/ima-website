@@ -108,6 +108,17 @@ interface Member {
   avatar: string;
 }
 
+function getJoinedYear(memberNumber: number): string {
+  if (memberNumber >= 825) {
+    return "2026";
+  }
+  const startYear = 2005;
+  const endYear = 2025;
+  const yearRange = endYear - startYear; // 20
+  const year = startYear + Math.floor(((memberNumber - 1) / 824) * (yearRange + 1));
+  return Math.min(2025, year).toString();
+}
+
 function generateMembers(): Member[] {
   const rand = mulberry32(42);
   const members: Member[] = [];
@@ -115,6 +126,7 @@ function generateMembers(): Member[] {
 
   for (let i = 0; i < TOTAL; i++) {
     const memberNumber = i + 1; // 1-indexed
+    const yearJoined = getJoinedYear(memberNumber);
 
     if (memberNumber === 845) {
       // Hari Chandrasekhar is member #845
@@ -124,7 +136,7 @@ function generateMembers(): Member[] {
         title: "World Record Contender & Aerodynamic Specialist",
         quote:
           "Nobody knows this but I think I'm the world record holder for the smallest penis",
-        joined: "2024",
+        joined: "2026",
         avatar: "/assets/Hari.jpg",
       });
       continue;
@@ -138,7 +150,7 @@ function generateMembers(): Member[] {
         title: "Distinguished Member & Aerodynamic Pioneer",
         quote:
           "Before discovering the IMA, I didn't realize how much the standard societal expectations were weighing me down. My compact design is actually an evolutionary leap in aerodynamic supremacy.",
-        joined: "2024",
+        joined: "2026",
         avatar: "/assets/6E84D118-76DC-4645-BD09-68BFD7933FCA.jpg",
       });
       continue;
@@ -148,7 +160,6 @@ function generateMembers(): Member[] {
     const lastIdx = Math.floor(rand() * LAST_NAMES.length);
     const titleIdx = Math.floor(rand() * TITLES.length);
     const quoteIdx = Math.floor(rand() * QUOTES.length);
-    const yearIdx = Math.floor(rand() * YEARS.length);
 
     // Use randomuser.me with deterministic seeds for consistent real-looking portraits
     const avatarSeed = Math.floor(rand() * 99999);
@@ -158,7 +169,7 @@ function generateMembers(): Member[] {
       name: `${FIRST_NAMES_MALE[firstIdx]} ${LAST_NAMES[lastIdx]}`,
       title: TITLES[titleIdx],
       quote: QUOTES[quoteIdx],
-      joined: YEARS[yearIdx],
+      joined: yearJoined,
       avatar: `https://randomuser.me/api/portraits/men/${avatarSeed % 100}.jpg`,
     });
   }
